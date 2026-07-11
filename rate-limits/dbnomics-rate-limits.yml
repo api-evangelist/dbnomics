@@ -1,0 +1,60 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: DBnomics
+providerId: dbnomics
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Economic Indicators
+- Open Data
+- Statistics
+- Rate Limiting
+- Quotas
+description: >-
+  DBnomics does not publish numeric rate limits for its public Web API. The
+  API requires no authentication or API key, so there is no per-account
+  quota; access is anonymous and free. Result-set size is governed by
+  limit/offset pagination on list endpoints (providers, datasets, search,
+  series) rather than by request-rate caps. Series responses default to a
+  limit of 1000 series per request. As a community-funded public good, heavy
+  bulk consumers are expected to paginate politely and prefer the official
+  Python/R clients or bulk downloads over hammering the API.
+notes: >-
+  No 429 policy, per-IP cap, or Retry-After behavior is documented as of the
+  review date. If you need the whole database, the platform is open source
+  and self-hostable, which removes any dependence on the shared public
+  infrastructure.
+sources:
+- https://api.db.nomics.world/v22/apidocs
+- https://api.db.nomics.world/v22/apispec_1.json
+- https://docs.db.nomics.world/
+responseCodes:
+  throttled: 429
+limits:
+- name: API Request Rate
+  scope: anonymous
+  metric: requests
+  limit: not published
+  notes: No numeric request-rate limit is documented; access is unauthenticated.
+- name: List Pagination
+  scope: request
+  metric: items
+  limit: limit/offset per endpoint
+  notes: Providers, datasets, search, and series list endpoints page with limit and offset parameters.
+- name: Series Per Request
+  scope: request
+  metric: series
+  limit: '1000 (default)'
+  notes: Series endpoints default to limit=1000 series per response; paginate with offset for more.
+policies:
+- name: Anonymous Access
+  description: No API key or account exists, so limits cannot be raised per customer; all consumers share the public infrastructure.
+- name: Polite Pagination
+  description: Iterate with limit/offset and cache responses; prefer the official Python/R clients or bulk downloads for large extractions.
+- name: Self-Host Escape Hatch
+  description: The full platform is open source on git.nomics.world; self-hosting removes any shared-infrastructure constraint.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

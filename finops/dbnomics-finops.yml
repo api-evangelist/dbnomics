@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: DBnomics
+providerId: dbnomics
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Economic Indicators
+- Macroeconomics
+- Open Data
+- Statistics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of DBnomics spend - which is zero on the vendor side. DBnomics
+  is a free, open-source digital public good operated by Cepremap and funded
+  by public-institution sponsorship, with no invoices, tiers, or metered
+  billing for API consumers. Any cost of consuming DBnomics is entirely on
+  your side: the compute, storage, and egress of your own pipelines that call
+  the API, and the infrastructure cost of a self-hosted deployment if you run
+  the open-source stack yourself.
+notes: >-
+  There is no FOCUS-mappable invoice from DBnomics. The meters below describe
+  internal cost drivers for consumers (own-infrastructure costs), not vendor
+  charges. Organizations depending on DBnomics in production should consider
+  sponsoring the project as a line item, since sustainability is
+  community-funded.
+sources:
+- https://db.nomics.world/
+- https://docs.db.nomics.world/
+- https://git.nomics.world/dbnomics
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Cepremap
+serviceCategory: Analytics and Open Data
+billingModel:
+  pricingCategory: Free
+  billingFrequency: None
+  billingCurrency: USD
+  chargeCategories: []
+focusColumns:
+  ServiceName: DBnomics Web API
+  ServiceCategory: Analytics and Open Data
+  ProviderName: DBnomics
+  PublisherName: Cepremap
+  InvoiceIssuerName: None (no invoicing; free public good)
+  BillingCurrency: USD
+  ChargeCategory: None
+  PricingCategory: Free
+meters:
+- name: api_requests
+  description: Requests your pipelines make to the public Web API; free on the DBnomics side, but drive your own compute and egress.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - pipeline
+  - provider_code
+- name: series_observations_pulled
+  description: Volume of time-series observations retrieved (observations=true); drives your own storage and processing costs.
+  unit: observations
+  aggregation: sum
+  dimensions:
+  - pipeline
+  - dataset
+- name: self_hosted_compute
+  description: Infrastructure cost of running a self-hosted DBnomics deployment (API plus per-provider fetchers); no vendor invoice.
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - deployment
+- name: sponsorship
+  description: Optional voluntary sponsorship of the DBnomics public good, if your organization chooses to contribute.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - organization
+principles:
+- name: Visibility
+  description: Track which internal pipelines and teams pull from DBnomics and how many series/observations they retrieve, since the cost lives in your infrastructure, not a vendor bill.
+- name: Allocation
+  description: Tag ingestion jobs per team or product so own-infrastructure costs of economic-data pulls map to cost centers.
+- name: Optimization
+  description: Cache series locally, poll /last-updates instead of re-pulling full datasets, request only needed dimensions, and use CSV/bulk downloads for large extractions.
+- name: Accountability
+  description: Assign an owner for the DBnomics dependency; if it becomes production-critical, budget a sponsorship contribution to sustain the upstream public good.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,360 @@
+{
+  "info": {
+    "name": "DBnomics API",
+    "description": "DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap serving macroeconomic time series from 90+ national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more). Base URL: https://api.db.nomics.world/v22. No authentication or API key required.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.db.nomics.world/v22"
+    }
+  ],
+  "item": [
+    {
+      "name": "Providers",
+      "item": [
+        {
+          "name": "List providers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/providers?limit=50&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50",
+                  "description": "The number of items to return."
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The number of items to skip."
+                }
+              ]
+            },
+            "description": "Lists the 90+ statistical agencies, central banks, and international institutions aggregated by DBnomics."
+          }
+        },
+        {
+          "name": "Retrieve a provider",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/providers/:provider_code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                ":provider_code"
+              ],
+              "variable": [
+                {
+                  "key": "provider_code",
+                  "value": "IMF",
+                  "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS)."
+                }
+              ]
+            },
+            "description": "Retrieves a provider with its full category tree of datasets."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Datasets",
+      "item": [
+        {
+          "name": "List datasets of a provider",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/datasets/:provider_code?limit=50&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "datasets",
+                ":provider_code"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50",
+                  "description": "The number of items to return."
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The number of items to skip."
+                }
+              ],
+              "variable": [
+                {
+                  "key": "provider_code",
+                  "value": "AMECO",
+                  "description": "Code of the provider."
+                }
+              ]
+            },
+            "description": "Lists the datasets of a provider with metadata, dimensions, and series counts."
+          }
+        },
+        {
+          "name": "Retrieve a dataset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/datasets/:provider_code/:dataset_code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "datasets",
+                ":provider_code",
+                ":dataset_code"
+              ],
+              "variable": [
+                {
+                  "key": "provider_code",
+                  "value": "AMECO",
+                  "description": "Code of the provider."
+                },
+                {
+                  "key": "dataset_code",
+                  "value": "ZUTN",
+                  "description": "Code of the dataset."
+                }
+              ]
+            },
+            "description": "Retrieves a single dataset of a provider."
+          }
+        },
+        {
+          "name": "List last updates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/last-updates?datasets.limit=20&providers.limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "last-updates"
+              ],
+              "query": [
+                {
+                  "key": "datasets.limit",
+                  "value": "20",
+                  "description": "The number of datasets to return."
+                },
+                {
+                  "key": "providers.limit",
+                  "value": "20",
+                  "description": "The number of providers to return."
+                }
+              ]
+            },
+            "description": "Lists providers and datasets sorted by creation/conversion date, most recent first."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Series",
+      "item": [
+        {
+          "name": "Retrieve series by IDs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/series?series_ids=ECB/RTD/A.S0.N.F_CEC_CGG_D0.F&observations=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "series"
+              ],
+              "query": [
+                {
+                  "key": "series_ids",
+                  "value": "ECB/RTD/A.S0.N.F_CEC_CGG_D0.F",
+                  "description": "Comma-separated series IDs formatted like provider_code/dataset_code/series_code."
+                },
+                {
+                  "key": "observations",
+                  "value": "true",
+                  "description": "Return observations for each series."
+                }
+              ]
+            },
+            "description": "Retrieves series found by IDs, potentially belonging to different providers and datasets."
+          }
+        },
+        {
+          "name": "List series of a dataset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/series/:provider_code/:dataset_code?observations=false&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "series",
+                ":provider_code",
+                ":dataset_code"
+              ],
+              "query": [
+                {
+                  "key": "observations",
+                  "value": "false",
+                  "description": "Return observations for each series."
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The number of series to return."
+                },
+                {
+                  "key": "dimensions",
+                  "value": "",
+                  "description": "JSON object describing the dimensions filtering the search.",
+                  "disabled": true
+                },
+                {
+                  "key": "q",
+                  "value": "",
+                  "description": "Full-text search query within the dataset.",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "provider_code",
+                  "value": "ECB",
+                  "description": "Code of the provider."
+                },
+                {
+                  "key": "dataset_code",
+                  "value": "RTD",
+                  "description": "Code of the dataset."
+                }
+              ]
+            },
+            "description": "Lists series belonging to the same dataset, filterable by dimensions or full-text query."
+          }
+        },
+        {
+          "name": "Retrieve series by code or mask",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/series/:provider_code/:dataset_code/:series_code?observations=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "series",
+                ":provider_code",
+                ":dataset_code",
+                ":series_code"
+              ],
+              "query": [
+                {
+                  "key": "observations",
+                  "value": "true",
+                  "description": "Return observations (periods and values)."
+                },
+                {
+                  "key": "format",
+                  "value": "json",
+                  "description": "Output format: json or csv.",
+                  "disabled": true
+                },
+                {
+                  "key": "align_periods",
+                  "value": "false",
+                  "description": "Align periods across series, filling NA where needed.",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "provider_code",
+                  "value": "ECB",
+                  "description": "Code of the provider."
+                },
+                {
+                  "key": "dataset_code",
+                  "value": "RTD",
+                  "description": "Code of the dataset."
+                },
+                {
+                  "key": "series_code",
+                  "value": "A.S0.N.F_CEC_CGG_D0.F",
+                  "description": "A series code or series code mask (dimension filter)."
+                }
+              ]
+            },
+            "description": "Retrieves series matching a series code or series code mask, optionally with observations."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Full-text search of datasets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search?q=inflation&limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "inflation",
+                  "description": "Full-text search query."
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "The number of items to return."
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The number of items to skip."
+                }
+              ]
+            },
+            "description": "Full-text search across every dataset aggregated by DBnomics."
+          }
+        }
+      ]
+    }
+  ]
+}

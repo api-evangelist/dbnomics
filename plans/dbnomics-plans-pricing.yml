@@ -1,0 +1,83 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: DBnomics
+providerId: dbnomics
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Economic Indicators
+- Macroeconomics
+- Open Data
+- Statistics
+- Free
+- Plans
+description: >-
+  DBnomics is free. There are no paid tiers, no API keys, and no billing - the
+  entire platform (website, Web API, downloads, Python/R clients) is an
+  open-source digital public good operated by Cepremap and sustained by
+  sponsorship from French public institutions (Agence francaise de
+  developpement, Banque de France, Direction generale du Tresor, France
+  Strategie) and community support. The whole stack, including every
+  per-provider fetcher, is open source on git.nomics.world and can be
+  self-hosted.
+notes: >-
+  There is no pricing page because there is no pricing. Underlying data
+  carries the terms of use of each originating provider (IMF, ECB, Eurostat,
+  etc.), which DBnomics surfaces per provider. Organizations relying on
+  DBnomics at scale are encouraged to sponsor the project.
+sources:
+- https://db.nomics.world/
+- https://docs.db.nomics.world/
+- https://git.nomics.world/dbnomics
+plans:
+- id: dbnomics-public
+  name: Public (Free and Open)
+  type: free
+  description: >-
+    The only plan. Unrestricted, unauthenticated access to the full Web API -
+    93 providers, hundreds of millions of economic time series, full-text
+    search, JSON and CSV output - plus website browsing and bulk downloads.
+    No registration, API key, or credit card.
+  entries:
+  - label: API Requests
+    name: api_requests
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (no key, no metering)
+    userMultiplied: false
+  elements:
+  - name: Providers, Datasets, Series, Search Endpoints
+  - name: Series Observations (JSON and CSV)
+  - name: Last-Updates Feed
+  - name: Python and R Clients
+  - name: Bulk Downloads (CSV, XLSX)
+- id: dbnomics-self-hosted
+  name: Self-Hosted (Open Source)
+  type: free
+  description: >-
+    The DBnomics platform - API, fetchers, and tooling - is open source on
+    Cepremap's GitLab (git.nomics.world, mirrored at github.com/dbnomics) and
+    can be run on your own infrastructure at your own cost.
+  entries:
+  - label: Self-Hosted Deployment
+    name: self_hosted
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (open source; you provide infrastructure)
+    userMultiplied: false
+  elements:
+  - name: Full Platform Source Code
+  - name: Per-Provider Fetchers
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

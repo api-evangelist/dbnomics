@@ -1,0 +1,95 @@
+aid: dbnomics
+name: DBnomics
+review:
+  question: Does DBnomics expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. The DBnomics Web API
+    (https://api.db.nomics.world/v22) is a plain request/response REST API
+    over HTTPS - providers, datasets, series, search, and last-updates are
+    all synchronous GET endpoints, with JSON or CSV output. There is no
+    server-push transport (WebSocket or SSE) to model. Freshness is handled
+    by daily fetcher runs on the DBnomics side and by clients polling the
+    /last-updates endpoint.
+findings:
+  summary: |
+    DBnomics does not publish a documented public WebSocket API. DBnomics is
+    an open-source economic database aggregator run by Cepremap that
+    harvests macroeconomic time series from 93 national and international
+    providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more)
+    into one standardized format. Its public surface is a documented REST
+    API at https://api.db.nomics.world/v22 (Swagger definition at
+    /v22/apispec_1.json, interactive docs at /v22/apidocs, API version
+    22.1.17 at review time) with no authentication or API key required.
+    Every endpoint is a synchronous HTTP GET - /providers, /datasets,
+    /series, /search, /last-updates. Series observations are returned
+    inline (observations=true) as JSON or CSV. No realtime, bidirectional,
+    or streaming WebSocket (ws:// or wss://) endpoint is documented
+    anywhere in the API definition or the docs.db.nomics.world
+    documentation as of the review date.
+  openSource: |
+    The whole DBnomics platform is open source, developed on Cepremap's
+    GitLab instance at git.nomics.world (dbnomics/dbnomics-api and dozens of
+    per-provider fetcher repos), with mirrors on github.com/dbnomics. Data
+    is refreshed daily by dedicated fetchers per provider, converted to a
+    standardized format, and past revisions are archived for reproducible
+    research. Official Python (dbnomics-python-client) and R (rdbnomics)
+    clients are published, plus community clients for Julia, Matlab, Stata,
+    EViews, and Gretl. The service is funded as a digital public good with
+    support from French institutions (Agence francaise de developpement,
+    Banque de France, Direction generale du Tresor, France Strategie).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.db.nomics.world/v22
+      documented: true
+      note: Public Web API, all GET, no auth. Swagger 2.0 definition served at /v22/apispec_1.json; interactive docs at /v22/apidocs.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the API definition or documentation as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No server-sent events surface. Update freshness is exposed via the polled /last-updates endpoint instead.
+  endpointsConfirmedRest:
+    - GET https://api.db.nomics.world/v22/providers
+    - GET https://api.db.nomics.world/v22/providers/{provider_code}
+    - GET https://api.db.nomics.world/v22/datasets/{provider_code}
+    - GET https://api.db.nomics.world/v22/datasets/{provider_code}/{dataset_code}
+    - GET https://api.db.nomics.world/v22/last-updates
+    - GET https://api.db.nomics.world/v22/search
+    - GET https://api.db.nomics.world/v22/series
+    - GET https://api.db.nomics.world/v22/series/{provider_code}/{dataset_code}
+    - GET https://api.db.nomics.world/v22/series/{provider_code}/{dataset_code}/{series_code}
+sources:
+  - url: https://api.db.nomics.world/v22/apidocs
+    type: APIReference
+    note: Interactive Swagger UI for the v22 Web API. All endpoints are synchronous GET; no WebSocket mentioned.
+  - url: https://api.db.nomics.world/v22/apispec_1.json
+    type: OpenAPI
+    note: Live Swagger 2.0 definition (Flasgger), API version 22.1.17; grounded the endpoint list above and the local OpenAPI 3.0.3 rendering.
+  - url: https://docs.db.nomics.world/
+    type: Documentation
+    note: Documentation hub covering website, Web API, downloads, data model, and clients. No streaming transport documented.
+  - url: https://db.nomics.world/
+    type: Website
+    note: DBnomics portal - free access, run by Cepremap, sustained as a digital public good.
+  - url: https://git.nomics.world/dbnomics/dbnomics-api
+    type: SourceCode
+    note: Canonical open-source repository for the Web API on Cepremap's GitLab.
+  - url: https://github.com/dbnomics
+    type: GitHubOrganization
+    note: GitHub mirror of git.nomics.world, including the rdbnomics R client and analysis dashboards.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push protocol surface exists. The DBnomics
+    public API is entirely synchronous request/response REST (GET-only)
+    serving providers, datasets, series observations, search, and a polled
+    last-updates feed. No AsyncAPI document was created because there is no
+    event-driven transport to model.

@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DBnomics API",
+    "version": "22.1.17"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/providers?limit=50&offset=0"
+          },
+          "docs": "Lists the 90+ statistical agencies, central banks, and international institutions aggregated by DBnomics."
+        },
+        {
+          "info": {
+            "name": "Retrieve a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/providers/:provider_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "IMF",
+                "type": "path",
+                "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS)."
+              }
+            ]
+          },
+          "docs": "Retrieves a provider with its full category tree of datasets."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List datasets of a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/datasets/:provider_code?limit=50&offset=0",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "AMECO",
+                "type": "path",
+                "description": "Code of the provider."
+              }
+            ]
+          },
+          "docs": "Lists the datasets of a provider with metadata, dimensions, and series counts."
+        },
+        {
+          "info": {
+            "name": "Retrieve a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/datasets/:provider_code/:dataset_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "AMECO",
+                "type": "path",
+                "description": "Code of the provider."
+              },
+              {
+                "name": "dataset_code",
+                "value": "ZUTN",
+                "type": "path",
+                "description": "Code of the dataset."
+              }
+            ]
+          },
+          "docs": "Retrieves a single dataset of a provider."
+        },
+        {
+          "info": {
+            "name": "List last updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/last-updates?datasets.limit=20&providers.limit=20"
+          },
+          "docs": "Lists providers and datasets sorted by creation/conversion date, most recent first."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve series by IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/series?series_ids=ECB/RTD/A.S0.N.F_CEC_CGG_D0.F&observations=true"
+          },
+          "docs": "Retrieves series found by IDs (provider_code/dataset_code/series_code), potentially across providers and datasets."
+        },
+        {
+          "info": {
+            "name": "List series of a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/series/:provider_code/:dataset_code?observations=false&limit=100",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "ECB",
+                "type": "path",
+                "description": "Code of the provider."
+              },
+              {
+                "name": "dataset_code",
+                "value": "RTD",
+                "type": "path",
+                "description": "Code of the dataset."
+              }
+            ]
+          },
+          "docs": "Lists series belonging to the same dataset, filterable by dimensions or full-text query."
+        },
+        {
+          "info": {
+            "name": "Retrieve series by code or mask",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/series/:provider_code/:dataset_code/:series_code?observations=true",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "ECB",
+                "type": "path",
+                "description": "Code of the provider."
+              },
+              {
+                "name": "dataset_code",
+                "value": "RTD",
+                "type": "path",
+                "description": "Code of the dataset."
+              },
+              {
+                "name": "series_code",
+                "value": "A.S0.N.F_CEC_CGG_D0.F",
+                "type": "path",
+                "description": "A series code or series code mask (dimension filter)."
+              }
+            ]
+          },
+          "docs": "Retrieves series matching a series code or series code mask, optionally with observations in JSON or CSV."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Full-text search of datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/search?q=inflation&limit=20&offset=0"
+          },
+          "docs": "Full-text search across every dataset aggregated by DBnomics."
+        }
+      ]
+    }
+  ]
+}
