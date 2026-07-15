@@ -104,6 +104,8 @@ apis:
     find economic indicators, government statistics, and macroeconomic series
     by keyword with simple limit/offset pagination.
 common:
+- type: AgenticAccess
+  url: agentic-access/dbnomics-agentic-access.yml
 - type: DomainSecurity
   url: security/dbnomics-domain-security.yml
 - type: Website
