@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: DBnomics Datasets Providers API
+  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).
+  version: 22.1.17
+  contact:
+    name: DBnomics
+    url: https://db.nomics.world
+    email: contact@nomics.world
+  license:
+    name: GNU Affero General Public License v3.0
+    url: https://git.nomics.world/dbnomics/dbnomics-api
+servers:
+- url: https://api.db.nomics.world/v22
+  description: DBnomics Web API v22 (public, no authentication)
+tags:
+- name: Providers
+  description: Statistical agencies, central banks, and institutions aggregated by DBnomics.
+paths:
+  /providers:
+    get:
+      operationId: listProviders
+      tags:
+      - Providers
+      summary: List providers
+      description: Responds with the paginated list of providers aggregated by DBnomics.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A list of providers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+                  providers:
+                    type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Provider'
+                      limit:
+                        type: integer
+                      num_found:
+                        type: integer
+                      offset:
+                        type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /providers/{provider_code}:
+    get:
+      operationId: getProvider
+      tags:
+      - Providers
+      summary: Retrieve a provider
+      description: Responds with a provider and its category tree of datasets.
+      parameters:
+      - $ref: '#/components/parameters/ProviderCode'
+      responses:
+        '200':
+          description: The requested provider with its category tree.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+                  provider:
+                    $ref: '#/components/schemas/Provider'
+                  category_tree:
+                    type: array
+                    items:
+                      type: object
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        message:
+          type: string
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
+    Provider:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ECB
+        name:
+          type: string
+          example: European Central Bank
+        region:
+          type: string
+        slug:
+          type: string
+        terms_of_use:
+          type: string
+        website:
+          type: string
+        indexed_at:
+          type: string
+          format: date-time
+  parameters:
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+  responses:
+    BadRequest:
+      description: The request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

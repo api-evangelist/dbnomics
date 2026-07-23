@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: DBnomics Datasets Search API
+  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).
+  version: 22.1.17
+  contact:
+    name: DBnomics
+    url: https://db.nomics.world
+    email: contact@nomics.world
+  license:
+    name: GNU Affero General Public License v3.0
+    url: https://git.nomics.world/dbnomics/dbnomics-api
+servers:
+- url: https://api.db.nomics.world/v22
+  description: DBnomics Web API v22 (public, no authentication)
+tags:
+- name: Search
+  description: Full-text search across all datasets.
+paths:
+  /search:
+    get:
+      operationId: searchDatasets
+      tags:
+      - Search
+      summary: Full-text search of datasets
+      description: Responds with a list of datasets from a full-text search across every provider aggregated by DBnomics.
+      parameters:
+      - name: q
+        in: query
+        description: Full-text search query.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Datasets matching the search query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+                  results:
+                    type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Dataset'
+                      limit:
+                        type: integer
+                      num_found:
+                        type: integer
+                      offset:
+                        type: integer
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        provider_code:
+          type: string
+        provider_name:
+          type: string
+        nb_series:
+          type: integer
+        dimensions_codes_order:
+          type: array
+          items:
+            type: string
+        dimensions_labels:
+          type: object
+        dimensions_values_labels:
+          type: object
+        indexed_at:
+          type: string
+          format: date-time
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer

@@ -1,0 +1,228 @@
+openapi: 3.0.3
+info:
+  title: DBnomics Datasets API
+  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).
+  version: 22.1.17
+  contact:
+    name: DBnomics
+    url: https://db.nomics.world
+    email: contact@nomics.world
+  license:
+    name: GNU Affero General Public License v3.0
+    url: https://git.nomics.world/dbnomics/dbnomics-api
+servers:
+- url: https://api.db.nomics.world/v22
+  description: DBnomics Web API v22 (public, no authentication)
+tags:
+- name: Datasets
+  description: Dataset metadata within a provider, plus the last-updates feed.
+paths:
+  /datasets/{provider_code}:
+    get:
+      operationId: listDatasets
+      tags:
+      - Datasets
+      summary: List datasets of a provider
+      description: Responds with one or several datasets of a provider.
+      parameters:
+      - $ref: '#/components/parameters/ProviderCode'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Datasets belonging to the provider.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /datasets/{provider_code}/{dataset_code}:
+    get:
+      operationId: getDataset
+      tags:
+      - Datasets
+      summary: Retrieve a dataset
+      description: Responds with a single dataset of a provider.
+      parameters:
+      - $ref: '#/components/parameters/ProviderCode'
+      - $ref: '#/components/parameters/DatasetCode'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: The requested dataset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /last-updates:
+    get:
+      operationId: getLastUpdates
+      tags:
+      - Datasets
+      summary: List last updates
+      description: Responds with a list of providers and a list of datasets sorted by creation/conversion date, most recent first.
+      parameters:
+      - name: datasets.limit
+        in: query
+        description: The number of datasets to return.
+        schema:
+          type: integer
+      - name: datasets.offset
+        in: query
+        description: The number of datasets to skip before starting to collect the result set.
+        schema:
+          type: integer
+      - name: providers.limit
+        in: query
+        description: The number of providers to return.
+        schema:
+          type: integer
+      - name: providers.offset
+        in: query
+        description: The number of providers to skip before starting to collect the result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Recently updated providers and datasets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+                  datasets:
+                    type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Dataset'
+                  providers:
+                    type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Provider'
+components:
+  schemas:
+    DatasetsResponse:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        datasets:
+          type: object
+          properties:
+            docs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Dataset'
+            limit:
+              type: integer
+            num_found:
+              type: integer
+            offset:
+              type: integer
+    Error:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        message:
+          type: string
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
+    Provider:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ECB
+        name:
+          type: string
+          example: European Central Bank
+        region:
+          type: string
+        slug:
+          type: string
+        terms_of_use:
+          type: string
+        website:
+          type: string
+        indexed_at:
+          type: string
+          format: date-time
+    Dataset:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        provider_code:
+          type: string
+        provider_name:
+          type: string
+        nb_series:
+          type: integer
+        dimensions_codes_order:
+          type: array
+          items:
+            type: string
+        dimensions_labels:
+          type: object
+        dimensions_values_labels:
+          type: object
+        indexed_at:
+          type: string
+          format: date-time
+  parameters:
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
