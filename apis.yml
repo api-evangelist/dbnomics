@@ -12,7 +12,19 @@ description: DBnomics is the world's economic database - a free, open-source
   REST API (api.db.nomics.world/v22) that requires no API key, plus official
   Python and R clients and community clients for Julia, Matlab, Stata, EViews,
   and Gretl.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dbnomics.png
 tags:
 - Economic Indicators
 - Macroeconomics
@@ -24,85 +36,62 @@ created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.19'
 apis:
-- aid: dbnomics:dbnomics-providers-api
-  name: DBnomics Providers API
-  tags:
-  - Providers
-  - Data Sources
-  - Statistics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.db.nomics.world/v22/apidocs
-  baseURL: https://api.db.nomics.world/v22
-  properties:
-  - url: https://docs.db.nomics.world/
-    type: Documentation
-  - url: https://api.db.nomics.world/v22/apidocs
-    type: APIReference
-  - url: openapi/dbnomics-openapi.yml
-    type: OpenAPI
-  description: List the 90+ statistical agencies, central banks, and
-    international institutions aggregated by DBnomics, or retrieve a single
-    provider with its full category tree of datasets. No authentication
-    required.
 - aid: dbnomics:dbnomics-datasets-api
   name: DBnomics Datasets API
+  description: Dataset metadata within a provider, plus the last-updates feed.
+  humanURL: https://api.db.nomics.world/v22/apidocs
+  baseURL: https://api.db.nomics.world/v22
   tags:
   - Datasets
-  - Economic Indicators
-  - Government Reports
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/dbnomics-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.db.nomics.world/
+  - type: APIReference
+    url: https://api.db.nomics.world/v22/apidocs
+- aid: dbnomics:dbnomics-providers-api
+  name: DBnomics Providers API
+  description: Statistical agencies, central banks, and institutions aggregated by DBnomics.
   humanURL: https://api.db.nomics.world/v22/apidocs
   baseURL: https://api.db.nomics.world/v22
-  properties:
-  - url: https://docs.db.nomics.world/
-    type: Documentation
-  - url: https://api.db.nomics.world/v22/apidocs
-    type: APIReference
-  - url: openapi/dbnomics-openapi.yml
-    type: OpenAPI
-  description: Retrieve dataset metadata for any provider - one dataset or the
-    paginated list of a provider's datasets, including dimensions, series
-    counts, and update timestamps - plus a last-updates feed of the most
-    recently refreshed providers and datasets across the whole database.
-- aid: dbnomics:dbnomics-series-api
-  name: DBnomics Series API
   tags:
-  - Time Series
-  - Observations
-  - Macroeconomics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.db.nomics.world/v22/apidocs
-  baseURL: https://api.db.nomics.world/v22
+  - Providers
   properties:
-  - url: https://docs.db.nomics.world/
-    type: Documentation
-  - url: https://api.db.nomics.world/v22/apidocs
-    type: APIReference
-  - url: openapi/dbnomics-openapi.yml
-    type: OpenAPI
-  description: Fetch economic time series and their observations - by explicit
-    series IDs across providers, by provider and dataset with dimension filters
-    or series-code masks, or as a single series - with JSON or CSV output,
-    period alignment, facets, and metadata options.
+  - type: OpenAPI
+    url: openapi/dbnomics-providers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.db.nomics.world/
+  - type: APIReference
+    url: https://api.db.nomics.world/v22/apidocs
 - aid: dbnomics:dbnomics-search-api
   name: DBnomics Search API
-  tags:
-  - Search
-  - Discovery
-  - Open Data
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Full-text search across all datasets.
   humanURL: https://api.db.nomics.world/v22/apidocs
   baseURL: https://api.db.nomics.world/v22
+  tags:
+  - Search
   properties:
-  - url: https://docs.db.nomics.world/
-    type: Documentation
-  - url: https://api.db.nomics.world/v22/apidocs
-    type: APIReference
-  - url: openapi/dbnomics-openapi.yml
-    type: OpenAPI
-  description: Full-text search across every dataset aggregated by DBnomics -
-    find economic indicators, government statistics, and macroeconomic series
-    by keyword with simple limit/offset pagination.
+  - type: OpenAPI
+    url: openapi/dbnomics-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.db.nomics.world/
+  - type: APIReference
+    url: https://api.db.nomics.world/v22/apidocs
+- aid: dbnomics:dbnomics-series-api
+  name: DBnomics Series API
+  description: Economic time series and their observations.
+  humanURL: https://api.db.nomics.world/v22/apidocs
+  baseURL: https://api.db.nomics.world/v22
+  tags:
+  - Series
+  properties:
+  - type: OpenAPI
+    url: openapi/dbnomics-series-api-openapi.yml
+  - type: Documentation
+    url: https://docs.db.nomics.world/
+  - type: APIReference
+    url: https://api.db.nomics.world/v22/apidocs
 common:
 - type: AgenticAccess
   url: agentic-access/dbnomics-agentic-access.yml
