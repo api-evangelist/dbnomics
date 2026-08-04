@@ -1,0 +1,20 @@
+{
+  "provider": "dbnomics",
+  "sources": [
+    "dbnomics-datasets-api-openapi.yml",
+    "dbnomics-providers-api-openapi.yml",
+    "dbnomics-search-api-openapi.yml",
+    "dbnomics-series-api-openapi.yml"
+  ],
+  "outputs": [
+    "dbnomics-datasets-api-openapi.yml",
+    "dbnomics-providers-api-openapi.yml",
+    "dbnomics-search-api-openapi.yml",
+    "dbnomics-series-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
