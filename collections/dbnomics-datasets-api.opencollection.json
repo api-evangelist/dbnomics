@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DBnomics Datasets API",
+    "version": "22.1.17"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List datasets of a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/datasets/:provider_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with one or several datasets of a provider."
+        },
+        {
+          "info": {
+            "name": "Retrieve a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/datasets/:provider_code/:dataset_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+              },
+              {
+                "name": "dataset_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the dataset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with a single dataset of a provider."
+        },
+        {
+          "info": {
+            "name": "List last updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/last-updates",
+            "params": [
+              {
+                "name": "datasets.limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of datasets to return."
+              },
+              {
+                "name": "datasets.offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of datasets to skip before starting to collect the result set."
+              },
+              {
+                "name": "providers.limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of providers to return."
+              },
+              {
+                "name": "providers.offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of providers to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with a list of providers and a list of datasets sorted by creation/conversion date, most recent first."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

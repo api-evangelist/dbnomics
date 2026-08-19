@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DBnomics Datasets Providers API",
+    "version": "22.1.17"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/providers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with the paginated list of providers aggregated by DBnomics."
+        },
+        {
+          "info": {
+            "name": "Retrieve a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/providers/:provider_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+              }
+            ]
+          },
+          "docs": "Responds with a provider and its category tree of datasets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

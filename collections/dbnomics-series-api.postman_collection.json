@@ -1,0 +1,832 @@
+{
+  "item": [
+    {
+      "id": "fbc5b1fa-39be-4db3-9ce7-98490e3da0fd",
+      "name": "Series",
+      "description": {
+        "content": "Economic time series and their observations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ddafcb15-7839-444c-9417-74522f2c7843",
+          "name": "Retrieve series by IDs",
+          "request": {
+            "name": "Retrieve series by IDs",
+            "description": {
+              "content": "Responds with a list of series found by IDs, belonging potentially to different providers and datasets. A series ID is formatted like provider_code/dataset_code/series_code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "series_ids",
+                  "value": "<string>,<string>",
+                  "description": "(Required) List of series IDs separated by commas. A series ID is formatted like provider_code/dataset_code/series_code."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets",
+                  "value": "false",
+                  "description": "Return facets in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "observations",
+                  "value": "false",
+                  "description": "Return observations (periods and values) for each series in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "true",
+                  "description": "Return providers and datasets metadata in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced."
+                },
+                {
+                  "disabled": false,
+                  "key": "align_periods",
+                  "value": "false",
+                  "description": "Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05110b34-b1a8-4a86-84e7-e5d30645a5ab",
+              "name": "The requested series, optionally with observations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "false"
+                    },
+                    {
+                      "key": "observations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "align_periods",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"dataset\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"provider_code\": \"string\",\n    \"provider_name\": \"string\",\n    \"nb_series\": 4009,\n    \"dimensions_codes_order\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dimensions_labels\": {},\n    \"dimensions_values_labels\": {},\n    \"indexed_at\": \"2006-12-11T03:26:49.335Z\"\n  },\n  \"series\": {\n    \"docs\": [\n      {\n        \"series_code\": \"string\",\n        \"series_name\": \"string\",\n        \"provider_code\": \"string\",\n        \"dataset_code\": \"string\",\n        \"dataset_name\": \"string\",\n        \"dimensions\": {},\n        \"period\": [\n          \"string\",\n          \"string\"\n        ],\n        \"indexed_at\": \"1955-03-20T02:48:20.486Z\"\n      },\n      {\n        \"series_code\": \"string\",\n        \"series_name\": \"string\",\n        \"provider_code\": \"string\",\n        \"dataset_code\": \"string\",\n        \"dataset_name\": \"string\",\n        \"dimensions\": {},\n        \"period\": [\n          \"string\",\n          \"string\"\n        ],\n        \"indexed_at\": \"1962-11-30T14:04:27.459Z\"\n      }\n    ],\n    \"limit\": 9387,\n    \"num_found\": 2653,\n    \"offset\": 3082\n  },\n  \"providers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a51438e-4aeb-45e3-acb8-43e9908ec492",
+              "name": "The request parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "false"
+                    },
+                    {
+                      "key": "observations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "align_periods",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8a30b65-6f1a-41f2-8278-e5306e0a3594",
+          "name": "List series of a dataset",
+          "request": {
+            "name": "List series of a dataset",
+            "description": {
+              "content": "Responds with a list of series belonging to the same dataset, filterable by dimensions or a full-text query. If the dataset code ends with a format extension (e.g. .csv), some parameters are preset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                ":provider_code",
+                ":dataset_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "<string>",
+                  "description": "JSON object describing the dimensions filtering the search. Cannot be used with the series_code path parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Full-text search query within the dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets",
+                  "value": "false",
+                  "description": "Return facets in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "observations",
+                  "value": "false",
+                  "description": "Return observations (periods and values) for each series in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "true",
+                  "description": "Return providers and datasets metadata in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced."
+                },
+                {
+                  "disabled": false,
+                  "key": "align_periods",
+                  "value": "false",
+                  "description": "Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_code",
+                  "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_code",
+                  "description": "(Required) Code of the dataset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0af33001-819c-4f6d-822a-6682a2d0a43f",
+              "name": "Series belonging to the dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":provider_code",
+                    ":dataset_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "false"
+                    },
+                    {
+                      "key": "observations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "align_periods",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_code",
+                      "description": "(Required) Code of the dataset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"dataset\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"provider_code\": \"string\",\n    \"provider_name\": \"string\",\n    \"nb_series\": 4763,\n    \"dimensions_codes_order\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dimensions_labels\": {},\n    \"dimensions_values_labels\": {},\n    \"indexed_at\": \"1958-01-09T23:19:10.344Z\"\n  },\n  \"series\": {\n    \"docs\": [\n      {\n        \"series_code\": \"string\",\n        \"series_name\": \"string\",\n        \"provider_code\": \"string\",\n        \"dataset_code\": \"string\",\n        \"dataset_name\": \"string\",\n        \"dimensions\": {},\n        \"period\": [\n          \"string\",\n          \"string\"\n        ],\n        \"indexed_at\": \"1998-11-12T00:43:43.970Z\"\n      },\n      {\n        \"series_code\": \"string\",\n        \"series_name\": \"string\",\n        \"provider_code\": \"string\",\n        \"dataset_code\": \"string\",\n        \"dataset_name\": \"string\",\n        \"dimensions\": {},\n        \"period\": [\n          \"string\",\n          \"string\"\n        ],\n        \"indexed_at\": \"1991-05-30T01:41:50.966Z\"\n      }\n    ],\n    \"limit\": 7100,\n    \"num_found\": 7520,\n    \"offset\": 1860\n  },\n  \"providers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7042db13-5bb7-469b-bffe-3eb49e368bf8",
+              "name": "The requested provider, dataset, or series was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":provider_code",
+                    ":dataset_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "false"
+                    },
+                    {
+                      "key": "observations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "align_periods",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_code",
+                      "description": "(Required) Code of the dataset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be884bfb-a374-4825-9f60-728437d4e7b6",
+          "name": "Retrieve series by code or mask",
+          "request": {
+            "name": "Retrieve series by code or mask",
+            "description": {
+              "content": "Responds with the series of a dataset matching a series code or a series code mask (a dimension filter expressed in the code, e.g. using + for alternatives and empty segments as wildcards). Cannot be used with the dimensions parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                ":provider_code",
+                ":dataset_code",
+                ":series_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Full-text search query within the dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets",
+                  "value": "false",
+                  "description": "Return facets in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "observations",
+                  "value": "false",
+                  "description": "Return observations (periods and values) for each series in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "true",
+                  "description": "Return providers and datasets metadata in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced."
+                },
+                {
+                  "disabled": false,
+                  "key": "align_periods",
+                  "value": "false",
+                  "description": "Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_code",
+                  "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_code",
+                  "description": "(Required) Code of the dataset."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "series_code",
+                  "description": "(Required) A series code or series code mask (an alternative way to express a dimension filter)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87c6fc63-07e8-45fe-b81f-01ebf672d2cb",
+              "name": "The matching series, optionally with observations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":provider_code",
+                    ":dataset_code",
+                    ":series_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "false"
+                    },
+                    {
+                      "key": "observations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "align_periods",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_code",
+                      "description": "(Required) Code of the dataset."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "series_code",
+                      "description": "(Required) A series code or series code mask (an alternative way to express a dimension filter)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"dataset\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"provider_code\": \"string\",\n    \"provider_name\": \"string\",\n    \"nb_series\": 4763,\n    \"dimensions_codes_order\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dimensions_labels\": {},\n    \"dimensions_values_labels\": {},\n    \"indexed_at\": \"1958-01-09T23:19:10.344Z\"\n  },\n  \"series\": {\n    \"docs\": [\n      {\n        \"series_code\": \"string\",\n        \"series_name\": \"string\",\n        \"provider_code\": \"string\",\n        \"dataset_code\": \"string\",\n        \"dataset_name\": \"string\",\n        \"dimensions\": {},\n        \"period\": [\n          \"string\",\n          \"string\"\n        ],\n        \"indexed_at\": \"1998-11-12T00:43:43.970Z\"\n      },\n      {\n        \"series_code\": \"string\",\n        \"series_name\": \"string\",\n        \"provider_code\": \"string\",\n        \"dataset_code\": \"string\",\n        \"dataset_name\": \"string\",\n        \"dimensions\": {},\n        \"period\": [\n          \"string\",\n          \"string\"\n        ],\n        \"indexed_at\": \"1991-05-30T01:41:50.966Z\"\n      }\n    ],\n    \"limit\": 7100,\n    \"num_found\": 7520,\n    \"offset\": 1860\n  },\n  \"providers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afd8239e-c4e0-4c94-b1bb-b9c12d41053a",
+              "name": "The requested provider, dataset, or series was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":provider_code",
+                    ":dataset_code",
+                    ":series_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "false"
+                    },
+                    {
+                      "key": "observations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "align_periods",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_code",
+                      "description": "(Required) Code of the dataset."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "series_code",
+                      "description": "(Required) A series code or series code mask (an alternative way to express a dimension filter)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.db.nomics.world/v22",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "501824ba-ff30-4d6b-8d88-74a0e1059aa2",
+    "name": "DBnomics Datasets Series API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).\n\nContact Support:\n Name: DBnomics\n Email: contact@nomics.world",
+      "type": "text/plain"
+    }
+  }
+}

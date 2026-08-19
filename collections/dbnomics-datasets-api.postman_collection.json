@@ -1,0 +1,494 @@
+{
+  "item": [
+    {
+      "id": "23040a97-dc6b-426a-af96-09027f9ff775",
+      "name": "Datasets",
+      "description": {
+        "content": "Dataset metadata within a provider, plus the last-updates feed.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "880dba70-804e-462f-a6ca-5c6976cc75c9",
+          "name": "List datasets of a provider",
+          "request": {
+            "name": "List datasets of a provider",
+            "description": {
+              "content": "Responds with one or several datasets of a provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets",
+                ":provider_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_code",
+                  "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f37abf3a-695c-4a9a-92b4-e49a6bb1aac0",
+              "name": "Datasets belonging to the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":provider_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"datasets\": {\n    \"docs\": [\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 8499,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"1973-05-11T22:15:46.452Z\"\n      },\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 7596,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"2000-01-09T16:31:32.721Z\"\n      }\n    ],\n    \"limit\": 4230,\n    \"num_found\": 1016,\n    \"offset\": 724\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5719e4e8-474c-4dbc-b170-3d398566bf84",
+              "name": "The requested provider, dataset, or series was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":provider_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bae77a64-ba32-4e47-bedb-f66b277cf09f",
+          "name": "Retrieve a dataset",
+          "request": {
+            "name": "Retrieve a dataset",
+            "description": {
+              "content": "Responds with a single dataset of a provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets",
+                ":provider_code",
+                ":dataset_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_code",
+                  "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_code",
+                  "description": "(Required) Code of the dataset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a939eb87-f9f2-41d0-80dd-017422fa1ca9",
+              "name": "The requested dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":provider_code",
+                    ":dataset_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_code",
+                      "description": "(Required) Code of the dataset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"datasets\": {\n    \"docs\": [\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 7983,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"1950-10-13T07:06:17.691Z\"\n      },\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 99,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"1986-04-22T19:31:00.575Z\"\n      }\n    ],\n    \"limit\": 1411,\n    \"num_found\": 2907,\n    \"offset\": 1493\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e616ec82-a33f-4d37-82a2-0e07fb144a33",
+              "name": "The requested provider, dataset, or series was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":provider_code",
+                    ":dataset_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_code",
+                      "description": "(Required) Code of the dataset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02b4e99a-ccad-4afe-b0cc-8024042a930d",
+          "name": "List last updates",
+          "request": {
+            "name": "List last updates",
+            "description": {
+              "content": "Responds with a list of providers and a list of datasets sorted by creation/conversion date, most recent first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "last-updates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datasets.limit",
+                  "value": "<integer>",
+                  "description": "The number of datasets to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "datasets.offset",
+                  "value": "<integer>",
+                  "description": "The number of datasets to skip before starting to collect the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "providers.limit",
+                  "value": "<integer>",
+                  "description": "The number of providers to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "providers.offset",
+                  "value": "<integer>",
+                  "description": "The number of providers to skip before starting to collect the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91c1fffd-1656-462c-9f45-5f0726ec6e41",
+              "name": "Recently updated providers and datasets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "last-updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datasets.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "datasets.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "providers.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "providers.offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"datasets\": {\n    \"docs\": [\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 7194,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"2004-03-05T19:17:43.416Z\"\n      },\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 5238,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"1985-07-26T01:46:49.804Z\"\n      }\n    ]\n  },\n  \"providers\": {\n    \"docs\": [\n      {\n        \"code\": \"ECB\",\n        \"name\": \"European Central Bank\",\n        \"region\": \"string\",\n        \"slug\": \"string\",\n        \"terms_of_use\": \"string\",\n        \"website\": \"string\",\n        \"indexed_at\": \"2025-09-13T11:00:37.621Z\"\n      },\n      {\n        \"code\": \"ECB\",\n        \"name\": \"European Central Bank\",\n        \"region\": \"string\",\n        \"slug\": \"string\",\n        \"terms_of_use\": \"string\",\n        \"website\": \"string\",\n        \"indexed_at\": \"1971-11-03T12:05:11.901Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.db.nomics.world/v22",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5f92192f-1ecf-4db4-b9ba-06202b263326",
+    "name": "DBnomics Datasets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).\n\nContact Support:\n Name: DBnomics\n Email: contact@nomics.world",
+      "type": "text/plain"
+    }
+  }
+}

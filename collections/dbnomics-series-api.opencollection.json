@@ -1,0 +1,237 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DBnomics Datasets Series API",
+    "version": "22.1.17"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve series by IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/series",
+            "params": [
+              {
+                "name": "series_ids",
+                "value": "",
+                "type": "query",
+                "description": "List of series IDs separated by commas. A series ID is formatted like provider_code/dataset_code/series_code."
+              },
+              {
+                "name": "facets",
+                "value": "",
+                "type": "query",
+                "description": "Return facets in the response."
+              },
+              {
+                "name": "observations",
+                "value": "",
+                "type": "query",
+                "description": "Return observations (periods and values) for each series in the response."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Return providers and datasets metadata in the response."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced."
+              },
+              {
+                "name": "align_periods",
+                "value": "",
+                "type": "query",
+                "description": "Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with a list of series found by IDs, belonging potentially to different providers and datasets. A series ID is formatted like provider_code/dataset_code/series_code."
+        },
+        {
+          "info": {
+            "name": "List series of a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/series/:provider_code/:dataset_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+              },
+              {
+                "name": "dataset_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the dataset."
+              },
+              {
+                "name": "dimensions",
+                "value": "",
+                "type": "query",
+                "description": "JSON object describing the dimensions filtering the search. Cannot be used with the series_code path parameter."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search query within the dataset."
+              },
+              {
+                "name": "facets",
+                "value": "",
+                "type": "query",
+                "description": "Return facets in the response."
+              },
+              {
+                "name": "observations",
+                "value": "",
+                "type": "query",
+                "description": "Return observations (periods and values) for each series in the response."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Return providers and datasets metadata in the response."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced."
+              },
+              {
+                "name": "align_periods",
+                "value": "",
+                "type": "query",
+                "description": "Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with a list of series belonging to the same dataset, filterable by dimensions or a full-text query. If the dataset code ends with a format extension (e.g. .csv), some parameters are preset."
+        },
+        {
+          "info": {
+            "name": "Retrieve series by code or mask",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.db.nomics.world/v22/series/:provider_code/:dataset_code/:series_code",
+            "params": [
+              {
+                "name": "provider_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+              },
+              {
+                "name": "dataset_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the dataset."
+              },
+              {
+                "name": "series_code",
+                "value": "",
+                "type": "path",
+                "description": "A series code or series code mask (an alternative way to express a dimension filter)."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search query within the dataset."
+              },
+              {
+                "name": "facets",
+                "value": "",
+                "type": "query",
+                "description": "Return facets in the response."
+              },
+              {
+                "name": "observations",
+                "value": "",
+                "type": "query",
+                "description": "Return observations (periods and values) for each series in the response."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Return providers and datasets metadata in the response."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced."
+              },
+              {
+                "name": "align_periods",
+                "value": "",
+                "type": "query",
+                "description": "Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              }
+            ]
+          },
+          "docs": "Responds with the series of a dataset matching a series code or a series code mask (a dimension filter expressed in the code, e.g. using + for alternatives and empty segments as wildcards). Cannot be used with the dimensions parameter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

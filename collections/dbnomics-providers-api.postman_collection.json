@@ -1,0 +1,300 @@
+{
+  "item": [
+    {
+      "id": "a4530159-c293-41d3-a361-4d87dfd99103",
+      "name": "Providers",
+      "description": {
+        "content": "Statistical agencies, central banks, and institutions aggregated by DBnomics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "97135550-8db1-471d-bb3f-d87fa9a60420",
+          "name": "List providers",
+          "request": {
+            "name": "List providers",
+            "description": {
+              "content": "Responds with the paginated list of providers aggregated by DBnomics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ef4c4f2-13e2-48ea-9726-aa23c093b824",
+              "name": "A list of providers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"providers\": {\n    \"docs\": [\n      {\n        \"code\": \"ECB\",\n        \"name\": \"European Central Bank\",\n        \"region\": \"string\",\n        \"slug\": \"string\",\n        \"terms_of_use\": \"string\",\n        \"website\": \"string\",\n        \"indexed_at\": \"1975-05-09T18:05:14.741Z\"\n      },\n      {\n        \"code\": \"ECB\",\n        \"name\": \"European Central Bank\",\n        \"region\": \"string\",\n        \"slug\": \"string\",\n        \"terms_of_use\": \"string\",\n        \"website\": \"string\",\n        \"indexed_at\": \"1982-06-28T12:00:58.035Z\"\n      }\n    ],\n    \"limit\": 3548,\n    \"num_found\": 8891,\n    \"offset\": 4400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6b6288e-496e-406a-9ea9-95b39aac15da",
+              "name": "The request parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25e7858c-002f-446c-a631-f002d49e5ee2",
+          "name": "Retrieve a provider",
+          "request": {
+            "name": "Retrieve a provider",
+            "description": {
+              "content": "Responds with a provider and its category tree of datasets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                ":provider_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_code",
+                  "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "531d0abd-0fc7-4171-b489-1dd58bc09431",
+              "name": "The requested provider with its category tree.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":provider_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"provider\": {\n    \"code\": \"ECB\",\n    \"name\": \"European Central Bank\",\n    \"region\": \"string\",\n    \"slug\": \"string\",\n    \"terms_of_use\": \"string\",\n    \"website\": \"string\",\n    \"indexed_at\": \"2013-05-15T16:19:52.978Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d7e6ad7-ddbc-495c-8c2a-8f662fedda43",
+              "name": "The requested provider, dataset, or series was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":provider_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_code",
+                      "description": "(Required) Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.db.nomics.world/v22",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "97232035-138f-4b39-bbcb-c7b4b91a55af",
+    "name": "DBnomics Datasets Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).\n\nContact Support:\n Name: DBnomics\n Email: contact@nomics.world",
+      "type": "text/plain"
+    }
+  }
+}

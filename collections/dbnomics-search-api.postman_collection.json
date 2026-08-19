@@ -1,0 +1,134 @@
+{
+  "item": [
+    {
+      "id": "7f04a640-c8fd-463e-984e-700ddb8e078a",
+      "name": "Search",
+      "description": {
+        "content": "Full-text search across all datasets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ad7bf5d-9e10-4d3a-a33f-c8e71cd16e94",
+          "name": "Full-text search of datasets",
+          "request": {
+            "name": "Full-text search of datasets",
+            "description": {
+              "content": "Responds with a list of datasets from a full-text search across every provider aggregated by DBnomics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Full-text search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip before starting to collect the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb6770d0-d128-408c-85db-43d233aab69a",
+              "name": "Datasets matching the search query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"args\": {},\n    \"version\": \"22.1.17\"\n  },\n  \"results\": {\n    \"docs\": [\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 9861,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"1977-06-13T22:48:35.388Z\"\n      },\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"provider_code\": \"string\",\n        \"provider_name\": \"string\",\n        \"nb_series\": 7910,\n        \"dimensions_codes_order\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dimensions_labels\": {},\n        \"dimensions_values_labels\": {},\n        \"indexed_at\": \"1978-03-31T03:38:43.804Z\"\n      }\n    ],\n    \"limit\": 1470,\n    \"num_found\": 5322,\n    \"offset\": 8601\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.db.nomics.world/v22",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5c1472e9-093a-44e7-b406-fe9bfe0e3212",
+    "name": "DBnomics Datasets Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).\n\nContact Support:\n Name: DBnomics\n Email: contact@nomics.world",
+      "type": "text/plain"
+    }
+  }
+}
