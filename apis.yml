@@ -12,6 +12,18 @@ description: DBnomics is the world's economic database - a free, open-source
   REST API (api.db.nomics.world/v22) that requires no API key, plus official
   Python and R clients and community clients for Julia, Matlab, Stata, EViews,
   and Gretl.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: open
