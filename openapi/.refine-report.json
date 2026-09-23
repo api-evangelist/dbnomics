@@ -1,10 +1,7 @@
 {
   "provider": "dbnomics",
   "sources": [
-    "dbnomics-datasets-api-openapi.yml",
-    "dbnomics-providers-api-openapi.yml",
-    "dbnomics-search-api-openapi.yml",
-    "dbnomics-series-api-openapi.yml"
+    "_original/dbnomics-openapi.yml"
   ],
   "outputs": [
     "dbnomics-datasets-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "dbnomics-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "dbnomics-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dbnomics-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dbnomics-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dbnomics-series-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

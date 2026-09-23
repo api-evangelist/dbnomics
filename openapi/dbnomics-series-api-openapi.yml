@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: DBnomics Datasets Series API
-  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).
+  title: DBnomics Series API
+  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format.
   version: 22.1.17
   contact:
     name: DBnomics
@@ -134,11 +134,54 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: The request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    Format:
+      name: format
+      in: query
+      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
     Observations:
       name: observations
       in: query
       description: Return observations (periods and values) for each series in the response.
+      schema:
+        type: boolean
+        default: false
+    AlignPeriods:
+      name: align_periods
+      in: query
+      description: Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed.
       schema:
         type: boolean
         default: false
@@ -149,6 +192,13 @@ components:
       description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
       schema:
         type: string
+    Metadata:
+      name: metadata
+      in: query
+      description: Return providers and datasets metadata in the response.
+      schema:
+        type: boolean
+        default: true
     Limit:
       name: limit
       in: query
@@ -162,51 +212,7 @@ components:
       schema:
         type: boolean
         default: false
-    Format:
-      name: format
-      in: query
-      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
-    AlignPeriods:
-      name: align_periods
-      in: query
-      description: Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed.
-      schema:
-        type: boolean
-        default: false
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
-    Metadata:
-      name: metadata
-      in: query
-      description: Return providers and datasets metadata in the response.
-      schema:
-        type: boolean
-        default: true
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
   schemas:
-    Error:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/Meta'
-        message:
-          type: string
     Meta:
       type: object
       description: Request metadata echoed back with every response.
@@ -216,6 +222,28 @@ components:
         version:
           type: string
           example: 22.1.17
+    SeriesResponse:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        series:
+          type: object
+          properties:
+            docs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Series'
+            limit:
+              type: integer
+            num_found:
+              type: integer
+            offset:
+              type: integer
+        providers:
+          type: object
     Series:
       type: object
       properties:
@@ -239,8 +267,7 @@ components:
         value:
           type: array
           description: Observation values (when observations=true); NA when not available.
-          items:
-            nullable: true
+          items: {}
         indexed_at:
           type: string
           format: date-time
@@ -270,38 +297,10 @@ components:
         indexed_at:
           type: string
           format: date-time
-    SeriesResponse:
+    Error:
       type: object
       properties:
         _meta:
           $ref: '#/components/schemas/Meta'
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        series:
-          type: object
-          properties:
-            docs:
-              type: array
-              items:
-                $ref: '#/components/schemas/Series'
-            limit:
-              type: integer
-            num_found:
-              type: integer
-            offset:
-              type: integer
-        providers:
-          type: object
-  responses:
-    BadRequest:
-      description: The request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        message:
+          type: string

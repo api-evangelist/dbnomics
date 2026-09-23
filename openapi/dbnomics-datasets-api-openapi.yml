@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: DBnomics Datasets API
-  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).
+  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format.
   version: 22.1.17
   contact:
     name: DBnomics
@@ -111,32 +111,34 @@ paths:
                         items:
                           $ref: '#/components/schemas/Provider'
 components:
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
   schemas:
-    DatasetsResponse:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/Meta'
-        datasets:
-          type: object
-          properties:
-            docs:
-              type: array
-              items:
-                $ref: '#/components/schemas/Dataset'
-            limit:
-              type: integer
-            num_found:
-              type: integer
-            offset:
-              type: integer
-    Error:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/Meta'
-        message:
-          type: string
     Meta:
       type: object
       description: Request metadata echoed back with every response.
@@ -166,6 +168,24 @@ components:
         indexed_at:
           type: string
           format: date-time
+    DatasetsResponse:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        datasets:
+          type: object
+          properties:
+            docs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Dataset'
+            limit:
+              type: integer
+            num_found:
+              type: integer
+            offset:
+              type: integer
     Dataset:
       type: object
       properties:
@@ -192,33 +212,13 @@ components:
         indexed_at:
           type: string
           format: date-time
-  parameters:
-    ProviderCode:
-      name: provider_code
-      in: path
-      required: true
-      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
+    Error:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        message:
+          type: string
   responses:
     NotFound:
       description: The requested provider, dataset, or series was not found.

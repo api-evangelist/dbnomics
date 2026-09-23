@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: DBnomics Datasets Search API
-  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format. The Web API serves providers, datasets, series, and full-text search over HTTPS with no authentication or API key required. This document is grounded in the live Swagger definition published at https://api.db.nomics.world/v22/apispec_1.json (API version 22.1.17).
+  title: DBnomics Search API
+  description: DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, and more) into one standardized format.
   version: 22.1.17
   contact:
     name: DBnomics
@@ -93,15 +93,15 @@ components:
           type: string
           example: 22.1.17
   parameters:
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
     Limit:
       name: limit
       in: query
       description: The number of items to return.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
       schema:
         type: integer
