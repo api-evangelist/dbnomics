@@ -134,47 +134,18 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: The request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
-    Format:
-      name: format
-      in: query
-      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
     Observations:
       name: observations
       in: query
       description: Return observations (periods and values) for each series in the response.
+      schema:
+        type: boolean
+        default: false
+    Facets:
+      name: facets
+      in: query
+      description: Return facets in the response.
       schema:
         type: boolean
         default: false
@@ -205,23 +176,43 @@ components:
       description: The number of items to return.
       schema:
         type: integer
-    Facets:
-      name: facets
+    Format:
+      name: format
       in: query
-      description: Return facets in the response.
+      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
       schema:
-        type: boolean
-        default: false
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Meta:
-      type: object
-      description: Request metadata echoed back with every response.
-      properties:
-        args:
-          type: object
-        version:
-          type: string
-          example: 22.1.17
     SeriesResponse:
       type: object
       properties:
@@ -244,6 +235,41 @@ components:
               type: integer
         providers:
           type: object
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
+    Dataset:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        provider_code:
+          type: string
+        provider_name:
+          type: string
+        nb_series:
+          type: integer
+        dimensions_codes_order:
+          type: array
+          items:
+            type: string
+        dimensions_labels:
+          type: object
+        dimensions_values_labels:
+          type: object
+        indexed_at:
+          type: string
+          format: date-time
     Series:
       type: object
       properties:
@@ -268,32 +294,6 @@ components:
           type: array
           description: Observation values (when observations=true); NA when not available.
           items: {}
-        indexed_at:
-          type: string
-          format: date-time
-    Dataset:
-      type: object
-      properties:
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        provider_code:
-          type: string
-        provider_name:
-          type: string
-        nb_series:
-          type: integer
-        dimensions_codes_order:
-          type: array
-          items:
-            type: string
-        dimensions_labels:
-          type: object
-        dimensions_values_labels:
-          type: object
         indexed_at:
           type: string
           format: date-time

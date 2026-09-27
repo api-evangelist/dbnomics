@@ -111,43 +111,7 @@ paths:
                         items:
                           $ref: '#/components/schemas/Provider'
 components:
-  parameters:
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
-    ProviderCode:
-      name: provider_code
-      in: path
-      required: true
-      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
   schemas:
-    Meta:
-      type: object
-      description: Request metadata echoed back with every response.
-      properties:
-        args:
-          type: object
-        version:
-          type: string
-          example: 22.1.17
     Provider:
       type: object
       properties:
@@ -186,6 +150,15 @@ components:
               type: integer
             offset:
               type: integer
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
     Dataset:
       type: object
       properties:
@@ -226,3 +199,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
