@@ -81,6 +81,15 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
     Provider:
       type: object
       properties:
@@ -101,15 +110,6 @@ components:
         indexed_at:
           type: string
           format: date-time
-    Meta:
-      type: object
-      description: Request metadata echoed back with every response.
-      properties:
-        args:
-          type: object
-        version:
-          type: string
-          example: 22.1.17
     Error:
       type: object
       properties:
@@ -117,20 +117,13 @@ components:
           $ref: '#/components/schemas/Meta'
         message:
           type: string
-  responses:
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
     ProviderCode:
       name: provider_code
       in: path
@@ -138,15 +131,22 @@ components:
       description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
     Offset:
       name: offset
       in: query
       description: The number of items to skip before starting to collect the result set.
       schema:
         type: integer
+  responses:
+    BadRequest:
+      description: The request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -112,44 +112,6 @@ paths:
                           $ref: '#/components/schemas/Provider'
 components:
   schemas:
-    Provider:
-      type: object
-      properties:
-        code:
-          type: string
-          example: ECB
-        name:
-          type: string
-          example: European Central Bank
-        region:
-          type: string
-        slug:
-          type: string
-        terms_of_use:
-          type: string
-        website:
-          type: string
-        indexed_at:
-          type: string
-          format: date-time
-    DatasetsResponse:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/Meta'
-        datasets:
-          type: object
-          properties:
-            docs:
-              type: array
-              items:
-                $ref: '#/components/schemas/Dataset'
-            limit:
-              type: integer
-            num_found:
-              type: integer
-            offset:
-              type: integer
     Meta:
       type: object
       description: Request metadata echoed back with every response.
@@ -185,6 +147,26 @@ components:
         indexed_at:
           type: string
           format: date-time
+    Provider:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ECB
+        name:
+          type: string
+          example: European Central Bank
+        region:
+          type: string
+        slug:
+          type: string
+        terms_of_use:
+          type: string
+        website:
+          type: string
+        indexed_at:
+          type: string
+          format: date-time
     Error:
       type: object
       properties:
@@ -192,14 +174,31 @@ components:
           $ref: '#/components/schemas/Meta'
         message:
           type: string
-  responses:
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    DatasetsResponse:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        datasets:
+          type: object
+          properties:
+            docs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Dataset'
+            limit:
+              type: integer
+            num_found:
+              type: integer
+            offset:
+              type: integer
   parameters:
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
     ProviderCode:
       name: provider_code
       in: path
@@ -207,12 +206,6 @@ components:
       description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
     Offset:
       name: offset
       in: query
@@ -226,3 +219,10 @@ components:
       description: Code of the dataset.
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
