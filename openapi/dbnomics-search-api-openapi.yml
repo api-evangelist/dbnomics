@@ -70,6 +70,15 @@ components:
       schema:
         type: integer
   schemas:
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
     Dataset:
       type: object
       properties:
@@ -96,12 +105,3 @@ components:
         indexed_at:
           type: string
           format: date-time
-    Meta:
-      type: object
-      description: Request metadata echoed back with every response.
-      properties:
-        args:
-          type: object
-        version:
-          type: string
-          example: 22.1.17

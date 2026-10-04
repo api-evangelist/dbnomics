@@ -134,16 +134,85 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    Format:
+      name: format
+      in: query
+      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
+    Metadata:
+      name: metadata
+      in: query
+      description: Return providers and datasets metadata in the response.
+      schema:
+        type: boolean
+        default: true
+    Facets:
+      name: facets
+      in: query
+      description: Return facets in the response.
+      schema:
+        type: boolean
+        default: false
+    AlignPeriods:
+      name: align_periods
+      in: query
+      description: Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed.
+      schema:
+        type: boolean
+        default: false
+    Observations:
+      name: observations
+      in: query
+      description: Return observations (periods and values) for each series in the response.
+      schema:
+        type: boolean
+        default: false
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
   schemas:
-    Meta:
-      type: object
-      description: Request metadata echoed back with every response.
-      properties:
-        args:
-          type: object
-        version:
-          type: string
-          example: 22.1.17
     Dataset:
       type: object
       properties:
@@ -226,81 +295,12 @@ components:
         indexed_at:
           type: string
           format: date-time
-  responses:
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    Facets:
-      name: facets
-      in: query
-      description: Return facets in the response.
-      schema:
-        type: boolean
-        default: false
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
-    Format:
-      name: format
-      in: query
-      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
-    ProviderCode:
-      name: provider_code
-      in: path
-      required: true
-      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
-      schema:
-        type: string
-    Metadata:
-      name: metadata
-      in: query
-      description: Return providers and datasets metadata in the response.
-      schema:
-        type: boolean
-        default: true
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
-    AlignPeriods:
-      name: align_periods
-      in: query
-      description: Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed.
-      schema:
-        type: boolean
-        default: false
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
-    Observations:
-      name: observations
-      in: query
-      description: Return observations (periods and values) for each series in the response.
-      schema:
-        type: boolean
-        default: false
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17

@@ -111,42 +111,41 @@ paths:
                         items:
                           $ref: '#/components/schemas/Provider'
 components:
+  responses:
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
   schemas:
-    Meta:
-      type: object
-      description: Request metadata echoed back with every response.
-      properties:
-        args:
-          type: object
-        version:
-          type: string
-          example: 22.1.17
-    Dataset:
-      type: object
-      properties:
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        provider_code:
-          type: string
-        provider_name:
-          type: string
-        nb_series:
-          type: integer
-        dimensions_codes_order:
-          type: array
-          items:
-            type: string
-        dimensions_labels:
-          type: object
-        dimensions_values_labels:
-          type: object
-        indexed_at:
-          type: string
-          format: date-time
     Provider:
       type: object
       properties:
@@ -192,37 +191,38 @@ components:
               type: integer
             offset:
               type: integer
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
-    ProviderCode:
-      name: provider_code
-      in: path
-      required: true
-      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Dataset:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        provider_code:
+          type: string
+        provider_name:
+          type: string
+        nb_series:
+          type: integer
+        dimensions_codes_order:
+          type: array
+          items:
+            type: string
+        dimensions_labels:
+          type: object
+        dimensions_values_labels:
+          type: object
+        indexed_at:
+          type: string
+          format: date-time
+    Meta:
+      type: object
+      description: Request metadata echoed back with every response.
+      properties:
+        args:
+          type: object
+        version:
+          type: string
+          example: 22.1.17
