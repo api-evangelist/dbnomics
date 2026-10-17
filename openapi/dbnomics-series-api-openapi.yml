@@ -134,84 +134,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested provider, dataset, or series was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    ProviderCode:
-      name: provider_code
-      in: path
-      required: true
-      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      description: The number of items to skip before starting to collect the result set.
-      schema:
-        type: integer
-    Format:
-      name: format
-      in: query
-      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
-    Limit:
-      name: limit
-      in: query
-      description: The number of items to return.
-      schema:
-        type: integer
-    Metadata:
-      name: metadata
-      in: query
-      description: Return providers and datasets metadata in the response.
-      schema:
-        type: boolean
-        default: true
-    Facets:
-      name: facets
-      in: query
-      description: Return facets in the response.
-      schema:
-        type: boolean
-        default: false
-    AlignPeriods:
-      name: align_periods
-      in: query
-      description: Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed.
-      schema:
-        type: boolean
-        default: false
-    Observations:
-      name: observations
-      in: query
-      description: Return observations (periods and values) for each series in the response.
-      schema:
-        type: boolean
-        default: false
-    DatasetCode:
-      name: dataset_code
-      in: path
-      required: true
-      description: Code of the dataset.
-      schema:
-        type: string
   schemas:
     Dataset:
       type: object
@@ -239,35 +161,6 @@ components:
         indexed_at:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/Meta'
-        message:
-          type: string
-    SeriesResponse:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/Meta'
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        series:
-          type: object
-          properties:
-            docs:
-              type: array
-              items:
-                $ref: '#/components/schemas/Series'
-            limit:
-              type: integer
-            num_found:
-              type: integer
-            offset:
-              type: integer
-        providers:
-          type: object
     Series:
       type: object
       properties:
@@ -304,3 +197,110 @@ components:
         version:
           type: string
           example: 22.1.17
+    SeriesResponse:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        series:
+          type: object
+          properties:
+            docs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Series'
+            limit:
+              type: integer
+            num_found:
+              type: integer
+            offset:
+              type: integer
+        providers:
+          type: object
+    Error:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/Meta'
+        message:
+          type: string
+  parameters:
+    Metadata:
+      name: metadata
+      in: query
+      description: Return providers and datasets metadata in the response.
+      schema:
+        type: boolean
+        default: true
+    Limit:
+      name: limit
+      in: query
+      description: The number of items to return.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+    ProviderCode:
+      name: provider_code
+      in: path
+      required: true
+      description: Code of the provider (e.g. IMF, ECB, Eurostat, BLS, OECD).
+      schema:
+        type: string
+    AlignPeriods:
+      name: align_periods
+      in: query
+      description: Ensure that all the periods of each series are defined in every other series, adding NA (not available) values where needed.
+      schema:
+        type: boolean
+        default: false
+    DatasetCode:
+      name: dataset_code
+      in: path
+      required: true
+      description: Code of the dataset.
+      schema:
+        type: string
+    Format:
+      name: format
+      in: query
+      description: Format of the output. If using csv and the response includes series of different frequencies, many CSV files are produced.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
+    Facets:
+      name: facets
+      in: query
+      description: Return facets in the response.
+      schema:
+        type: boolean
+        default: false
+    Observations:
+      name: observations
+      in: query
+      description: Return observations (periods and values) for each series in the response.
+      schema:
+        type: boolean
+        default: false
+  responses:
+    BadRequest:
+      description: The request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested provider, dataset, or series was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
