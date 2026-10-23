@@ -226,3 +226,9 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+x-provenance:
+  method: harvested
+  publisher: DBnomics
+  source: https://api.db.nomics.world/v22/apispec_1.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
