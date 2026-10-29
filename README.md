@@ -1,4 +1,4 @@
-# DBnomics (dbnomics)
+# DBnomics
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,120 +64,122 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, Banque de France, Federal Statistical Office Germany, and many more) into one standardized format. Hundreds of millions of series covering economic indicators, government statistics, prices, employment, trade, and finance are refreshed daily and served through a documented public REST API (`api.db.nomics.world/v22`) that requires **no API key or authentication**, plus official Python and R clients and community clients for Julia, Matlab, Stata, EViews, and Gretl. The entire platform - API, per-provider fetchers, and tooling - is open source on Cepremap's GitLab (git.nomics.world, mirrored at github.com/dbnomics) and is sustained as a digital public good with sponsorship from French public institutions. There are no paid tiers and no billing; access is free for everyone.
+DBnomics is the world's economic database - a free, open-source aggregator run by Cepremap that harvests macroeconomic time series from more than 90 national and international providers (IMF, ECB, Eurostat, World Bank, OECD, BLS, BEA, Banque de France, Federal Statistical Office Germany, and many more) into one standardized format. Hundreds of millions of series covering economic indicators, government statistics, prices, employment, trade, and finance are refreshed daily and served through a documented public REST API (api.db.nomics.world/v22) that requires no API key, plus official Python and R clients and community clients for Julia, Matlab, Stata, EViews, and Gretl.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/dbnomics/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/dbnomics/refs/heads/main/apis.yml)
+**Areas:** Economic Indicators · Macroeconomics · Open Data · Statistics · Time Series · Government Data
 
-## Tags
+## DBnomics on APIs.io
 
-- Economic Indicators
-- Macroeconomics
-- Open Data
-- Statistics
-- Time Series
-- Government Data
+Everything profiled for DBnomics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/dbnomics/](https://apis.io/providers/dbnomics/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+- [DBnomics Datasets API](https://apis.io/apis/dbnomics/dbnomics-datasets-api/) — Dataset metadata within a provider, plus the last-updates feed.
+- [DBnomics Providers API](https://apis.io/apis/dbnomics/dbnomics-providers-api/) — Statistical agencies, central banks, and institutions aggregated by DBnomics.
+- [DBnomics Search API](https://apis.io/apis/dbnomics/dbnomics-search-api/) — Full-text search across all datasets.
+- [DBnomics Series API](https://apis.io/apis/dbnomics/dbnomics-series-api/) — Economic time series and their observations.
 
-## APIs
+### Published properties
 
-### DBnomics Providers API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-List the 90+ statistical agencies, central banks, and international institutions aggregated by DBnomics, or retrieve a single provider with its full category tree of datasets. No authentication required.
+#### Agentic access (1)
 
-- **Human URL:** [https://api.db.nomics.world/v22/apidocs](https://api.db.nomics.world/v22/apidocs)
-- **Base URL:** `https://api.db.nomics.world/v22`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Dbnomics Agentic Access](https://apis.io/agentic-access/dbnomics/dbnomics-agentic-access/)
 
-- Providers
-- Data Sources
-- Statistics
+#### Collections (5)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.db.nomics.world/)
-- [API Reference](https://api.db.nomics.world/v22/apidocs)
-- [OpenAPI](openapi/dbnomics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/dbnomics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/dbnomics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [DBnomics API](https://apis.io/collections/dbnomics/open-dbnomics/)
+- [DBnomics Datasets API](https://apis.io/collections/dbnomics/open-dbnomics-datasets-api/)
+- [DBnomics Datasets Providers API](https://apis.io/collections/dbnomics/open-dbnomics-providers-api/)
+- [DBnomics Datasets Search API](https://apis.io/collections/dbnomics/open-dbnomics-search-api/)
+- [DBnomics Datasets Series API](https://apis.io/collections/dbnomics/open-dbnomics-series-api/)
 
-### DBnomics Datasets API
+#### Security (1)
 
-Retrieve dataset metadata for any provider - one dataset or the paginated list of a provider's datasets, including dimensions, series counts, and update timestamps - plus a last-updates feed of the most recently refreshed providers and datasets across the whole database.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://api.db.nomics.world/v22/apidocs](https://api.db.nomics.world/v22/apidocs)
-- **Base URL:** `https://api.db.nomics.world/v22`
+- [Dbnomics Domain Security](https://apis.io/security/dbnomics/dbnomics-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Datasets
-- Economic Indicators
-- Government Reports
+Published plans, tiers and prices.
 
-#### Properties
+- [Dbnomics Plans Pricing](https://apis.io/plans/dbnomics/dbnomics-plans-pricing/)
 
-- [Documentation](https://docs.db.nomics.world/)
-- [API Reference](https://api.db.nomics.world/v22/apidocs)
-- [OpenAPI](openapi/dbnomics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/dbnomics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/dbnomics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### DBnomics Series API
+Published request limits.
 
-Fetch economic time series and their observations - by explicit series IDs across providers, by provider and dataset with dimension filters or series-code masks, or as a single series - with JSON or CSV output, period alignment, facets, and metadata options.
+- [Dbnomics Rate Limits](https://apis.io/rate-limits/dbnomics/dbnomics-rate-limits/)
 
-- **Human URL:** [https://api.db.nomics.world/v22/apidocs](https://api.db.nomics.world/v22/apidocs)
-- **Base URL:** `https://api.db.nomics.world/v22`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Time Series
-- Observations
-- Macroeconomics
+- [Dbnomics Finops](https://apis.io/finops/dbnomics/dbnomics-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.db.nomics.world/)
-- [API Reference](https://api.db.nomics.world/v22/apidocs)
-- [OpenAPI](openapi/dbnomics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/dbnomics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/dbnomics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### DBnomics Search API
-
-Full-text search across every dataset aggregated by DBnomics - find economic indicators, government statistics, and macroeconomic series by keyword with simple limit/offset pagination.
-
-- **Human URL:** [https://api.db.nomics.world/v22/apidocs](https://api.db.nomics.world/v22/apidocs)
-- **Base URL:** `https://api.db.nomics.world/v22`
-
-#### Tags
-
-- Search
-- Discovery
-- Open Data
-
-#### Properties
-
-- [Documentation](https://docs.db.nomics.world/)
-- [API Reference](https://api.db.nomics.world/v22/apidocs)
-- [OpenAPI](openapi/dbnomics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/dbnomics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/dbnomics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://db.nomics.world)
 - [Documentation](https://docs.db.nomics.world)
-- [GitHub Organization](https://github.com/dbnomics)
-- [Plans](plans/dbnomics-plans-pricing.yml)
-- [Rate Limits](rate-limits/dbnomics-rate-limits.yml)
-- [Fin Ops](finops/dbnomics-finops.yml)
+- [GitHub](https://github.com/dbnomics)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 22.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 16.7 |
+| Access clarity | 5.3 |
+
+**Agent readiness 17.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/dbnomics/](https://apis.io/providers/dbnomics/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for DBnomics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/dbnomics/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
